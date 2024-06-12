@@ -1,13 +1,10 @@
-import './App.css';
+import React from 'react';
+import PhotoCapture from './PhotoCapture';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <p>
-          Doc2Quiz :)
-        </p>
-      </header>
+      <PhotoCapture />
     </div>
   );
 }
