@@ -3,10 +3,11 @@ const AWS = require('aws-sdk');
 const textract = new AWS.Textract();
 
 async function image2Text(fileString) {
+  const base64Data = fileString.replace(/^data:image\/\w+;base64,/, "");
   const params = {
     Document: {
       /* directly providing image bytes */
-      Bytes: fileString
+      Bytes: Buffer.from(base64Data, 'base64')
     },
     FeatureTypes: ["TABLES", "FORMS"]
   };
