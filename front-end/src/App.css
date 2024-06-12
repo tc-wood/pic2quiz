@@ -1,6 +1,34 @@
-.App {
+body {
+  background-color: #222222;
+  color: #eeeeee
+}
+
+h1 {
+  margin: 10px auto;
+}
+
+.window {
   display: flex;
   flex-direction: column;
   align-items: center;
   font-family: Arial, sans-serif;
+}
+
+.capture-button {
+  background-color: #04AA6D;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 16px;
+  margin: 10px;
+  width: 35%;
+  border-radius: 15px;
+}
+
+.capture-button:hover {
+  background-color: #04c27c;
 }
