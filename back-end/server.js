@@ -8,6 +8,8 @@ const AWS = require('aws-sdk');
 const dotenv = require('dotenv');
 dotenv.config();
 
+const openAiRequest = require('./openAiRequest');
+
 
 // get AWS config keys and set them
 const { ACCESS_KEY_ID, SECRET_ACCESS_KEY } = process.env;
@@ -31,6 +33,26 @@ app.post('/gen', async (req, res) => {
   const { fileAsString } = req.body;
   const result = await image2Text(fileAsString);
   res.json({ result });
+});
+
+// open ai route
+app.post('/openai', async (req, res) => {
+  const { input } = req.body;
+  const { raw } = req.query;
+
+  try{
+    const response = await openAiRequest(input);
+
+    if(raw){
+      res.json({ response });
+      return;
+    }
+  
+    const result = JSON.parse(response.choices[0].message.content);
+    res.json({ response: result });
+  }catch(e){
+    res.json({ error: e.message, response: null });
+  }
 });
 
 app.listen(port, () => {
