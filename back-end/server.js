@@ -1,6 +1,7 @@
 const express = require('express');
+const cors = require('cors');
 const app = express();
-const port = 3000;
+const port = 5050;
 // add AWS sdk
 const AWS = require('aws-sdk');
 // add .env support - may only need this for development? If so we can add a flag
@@ -19,13 +20,14 @@ const image2Text = require('./image2Text');
 
 // add support for JSON
 app.use(express.json());
-
+app.use(cors())
 app.get('/', (req, res) => {
   res.send("Hello World");
 });
 
 // create a post route
 app.post('/gen', async (req, res) => {
+  console.log(req.body)
   const { fileAsString } = req.body;
   const result = await image2Text(fileAsString);
   res.json({ result });
