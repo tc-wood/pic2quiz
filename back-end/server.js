@@ -38,8 +38,21 @@ app.post('/gen', async (req, res) => {
 // open ai route
 app.post('/openai', async (req, res) => {
   const { input } = req.body;
-  const response = await openAiRequest(input);
-  res.json({ response });
+  const { raw } = req.query;
+
+  try{
+    const response = await openAiRequest(input);
+
+    if(raw){
+      res.json({ response });
+      return;
+    }
+  
+    const result = JSON.parse(response.choices[0].message.content);
+    res.json({ response: result });
+  }catch(e){
+    res.json({ error: e.message, response: null });
+  }
 });
 
 app.listen(port, () => {
