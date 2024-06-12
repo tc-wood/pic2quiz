@@ -65,7 +65,7 @@ const Home = () => {
       }
       setSystemMessage("Loading...");
       setLoading(true);
-      const textResponse = await fetch("http://localhost:5050/gen", textOptions);
+      const textResponse = await fetch("/gen", textOptions);
       const textToQuizzify = await textResponse.json();
       if(!textToQuizzify.result || textToQuizzify.result.length === 0){
         setSystemMessage("An error occurred. Please ensure that there is any text in your image.");
@@ -79,7 +79,7 @@ const Home = () => {
         },
         body: JSON.stringify({ input: textToQuizzify.result })
       }
-      const quizResponse = await fetch("http://localhost:5050/openai", quizOptions);
+      const quizResponse = await fetch("/openai", quizOptions);
       const quiz = await quizResponse.json();
       console.log(quiz)
       setLoading(false);
