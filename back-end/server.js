@@ -16,10 +16,6 @@ AWS.config.update({ accessKeyId: ACCESS_KEY_ID, secretAccessKey: SECRET_ACCESS_K
 // currently this is an async function which returns a string
 const image2Text = require('./image2Text');
 
-// this is just for a test image
-const fs = require('fs');
-const fileString = fs.readFileSync('./test.jpeg');
-
 
 // add support for JSON
 app.use(express.json());
