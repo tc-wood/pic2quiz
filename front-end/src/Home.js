@@ -95,7 +95,7 @@ const Home = () => {
     <div className="window">
       <h1>Doc<font style={{color: '#04AA6D'}}>2</font>Quiz</h1>
       <p>Take a photo of your notes and it'll make a quiz!</p>
-      <video ref={videoRef} width={videoDimensions.width} height={videoDimensions.height} autoPlay style={{ border: '3px solid white', borderRadius: '15px', maxWidth: '100%', maxHeight: '60vh' }}></video>
+      <video ref={videoRef} width={videoDimensions.width} height={videoDimensions.height} autoPlay={true} style={{ border: '3px solid white', borderRadius: '15px', maxWidth: '100%', maxHeight: '60vh' }} playsInline={true} muted={true}></video>
       {!loading && <button onClick={capturePhoto} className='capture-button'>Capture Photo</button>}
       <canvas ref={canvasRef} style={{ display: 'none' }}></canvas>
       {systemMessage && <p>{systemMessage}</p>}
