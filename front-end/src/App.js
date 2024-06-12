@@ -26,18 +26,14 @@ const App = () => {
       canvasRef.current.height = videoRef.current.videoHeight;
       context.drawImage(videoRef.current, 0, 0, canvasRef.current.width, canvasRef.current.height);
 
-      const dataUrl = canvasRef.current.toDataURL('image/png');
+      const dataUrl = canvasRef.current.toDataURL('image/jpeg', 0.7);
       const options = {
         method: 'POST',
-        mode: 'no-cors',
         headers: {
           "Content-Type": "application/json"
         },
-        body: {
-          fileAsString: dataUrl
-        }
+        body: JSON.stringify({ fileAsString: dataUrl })
       }
-      console.log(options.body.fileAsString)
       const response = await fetch("http://localhost:5050/gen", options)
       const data = await response.json()
       console.log(data)

@@ -19,7 +19,8 @@ const image2Text = require('./image2Text');
 
 
 // add support for JSON
-app.use(express.json());
+app.use(express.json({ limit: '1mb' }));
+app.use(express.urlencoded({ limit: '1mb', extended: true }));
 app.use(cors())
 app.get('/', (req, res) => {
   res.send("Hello World");
@@ -27,7 +28,6 @@ app.get('/', (req, res) => {
 
 // create a post route
 app.post('/gen', async (req, res) => {
-  console.log(req.body)
   const { fileAsString } = req.body;
   const result = await image2Text(fileAsString);
   res.json({ result });
