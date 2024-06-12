@@ -31,8 +31,8 @@ app.get('/', (req, res) => {
 // create a post route
 app.post('/gen', async (req, res) => {
   const { fileAsString } = req.body;
-  const result = await image2Text(fileString);
-  res.json({ result, fileAsString });
+  const result = await image2Text(fileAsString);
+  res.json({ result });
 });
 
 app.listen(port, () => {
