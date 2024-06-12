@@ -56,7 +56,7 @@ const Home = () => {
       canvasRef.current.height = videoRef.current.videoHeight;
       context.drawImage(videoRef.current, 0, 0, canvasRef.current.width, canvasRef.current.height);
       const dataUrl = canvasRef.current.toDataURL('image/jpeg', 0.7);
-      const options = {
+      const textOptions = {
         method: 'POST',
         headers: {
           "Content-Type": "application/json"
@@ -65,16 +65,26 @@ const Home = () => {
       }
       setSystemMessage("Loading...");
       setLoading(true);
-      const response = await fetch("http://localhost:5050/gen", options);
-      const data = await response.json();
-      if(!data.result || data.result.length === 0){
+      const textResponse = await fetch("http://localhost:5050/gen", textOptions);
+      const textToQuizzify = await textResponse.json();
+      if(!textToQuizzify.result || textToQuizzify.result.length === 0){
         setSystemMessage("An error occurred. Please ensure that there is any text in your image.");
         setLoading(false);
         return;
       }
+      const quizOptions = {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ input: textToQuizzify.result })
+      }
+      const quizResponse = await fetch("http://localhost:5050/openai", quizOptions);
+      const quiz = await quizResponse.json();
+      console.log(quiz)
       setLoading(false);
       setSystemMessage("");
-      navigate('/quiz', { state: data.result });
+      navigate('/quiz', { state: quiz.response });
     }
   };
 
