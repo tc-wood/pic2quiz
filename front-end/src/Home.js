@@ -37,7 +37,7 @@ const Home = () => {
     const handleResize = () => {
       if (videoRef.current) {
         const aspectRatio = videoDimensions.width / videoDimensions.height;
-        const maxVideoHeight = window.innerHeight * 0.6; // 60% of the window height
+        const maxVideoHeight = window.innerHeight * 0.6;
         const videoHeight = Math.min(maxVideoHeight, videoDimensions.height);
         const videoWidth = videoHeight * aspectRatio;
         setVideoDimensions({ width: videoWidth, height: videoHeight });
@@ -45,7 +45,7 @@ const Home = () => {
     };
 
     window.addEventListener('resize', handleResize);
-    handleResize(); // Initial call to set the size based on the initial window size
+    handleResize();
 
     return () => {
       window.removeEventListener('resize', handleResize);
